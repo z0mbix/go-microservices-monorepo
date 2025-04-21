@@ -1,0 +1,6 @@
+[env]
+mise.path = ["./bin"]
+APP_LOG_LEVEL = "debug"
+
+[tools]
+golang = "1.24.2"

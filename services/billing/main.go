@@ -1,0 +1,38 @@
+package main
+
+import (
+	"github.com/z0mbix/go-microservices-monorepo/pkg/config"
+	"github.com/z0mbix/go-microservices-monorepo/pkg/service"
+)
+
+const (
+	serviceName = "billing"
+	servicePort = 8001
+)
+
+var version = "local"
+
+func main() {
+	cfg, err := config.New(
+		config.WithDefaultPort(servicePort),
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	svc, err := service.NewWithName(
+		serviceName,
+		service.WithEnvironment(cfg.Environment),
+		service.WithPort(cfg.Port),
+		service.WithLogLevel(cfg.LogLevel),
+		service.WithVersion(version),
+	)
+	if err != nil {
+		panic(err)
+	}
+
+	err = svc.Run()
+	if err != nil {
+		panic(err)
+	}
+}
