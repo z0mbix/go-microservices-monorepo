@@ -1,1 +1,6 @@
 bin/*
+.exe
+services/billing/billing
+services/order/order
+services/shipping/shipping
+services/user/user

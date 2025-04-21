@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/z0mbix/go-microservices-monorepo/pkg/config"
 	"github.com/z0mbix/go-microservices-monorepo/pkg/service"
+	"github.com/z0mbix/go-microservices-monorepo/pkg/version"
 )
 
 const (
@@ -10,9 +11,9 @@ const (
 	servicePort = 8001
 )
 
-var version = "local"
-
 func main() {
+	serviceVersion := version.Version()
+
 	cfg, err := config.New(
 		config.WithDefaultPort(servicePort),
 	)
@@ -25,7 +26,7 @@ func main() {
 		service.WithEnvironment(cfg.Environment),
 		service.WithPort(cfg.Port),
 		service.WithLogLevel(cfg.LogLevel),
-		service.WithVersion(version),
+		service.WithVersion(serviceVersion),
 	)
 	if err != nil {
 		panic(err)
